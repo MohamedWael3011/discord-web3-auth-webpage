@@ -34,7 +34,7 @@ export const Home = () => {
     try {
       setIsLoading(true);
 
-      const message = `I am updating my Matic address at ${new Date().toISOString()}`;
+      const message = `Sign this message to prove ownership of this wallet. This is READ-ONLY access and will NOT trigger any blockchain transactions or incur any fees.`;
       const signature = await signer?.signMessage(message);
 
       const response = await axios.post(`http://${serverIp}:${port}/update-matic-address/`, {
