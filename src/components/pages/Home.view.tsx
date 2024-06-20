@@ -1,11 +1,9 @@
-import { client } from "../../client";
 import DiscordLoginButton from "../DiscordLoginButton";
 import { ConnectWallet, useAddress, useSigner } from "@thirdweb-dev/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { Button } from "../ui/button";
-import { ethers } from "ethers";
 
 interface IDiscordUser {
   username: string;
@@ -20,7 +18,6 @@ const useQuery = () => {
 export const Home = () => {
   const serverIp = import.meta.env.VITE_SERVER_IP;
   const port = import.meta.env.VITE_PORT;
-  console.log("Server IP:", serverIp, "Port:", port); // Verify the environment variables
 
   const [user, setUser] = useState<IDiscordUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,7 +39,7 @@ export const Home = () => {
       const signature = await signer?.signMessage(message);
       console.log("Signature:", signature);
 
-      const response = await axios.post(`http://${serverIp}:${port}/update-matic-address`, {
+      const response = await axios.post(`http://${serverIp}:${port}/update-matic-address/`, {
         discordID: user?.id,
         maticAddress: address,
         signature,
@@ -63,7 +60,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://${serverIp}:${port}/auth/discord/callback?code=${code}`);
+        const response = await axios.get(`http://${serverIp}:${port}/auth/discord/callback/?code=${code}`);
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
