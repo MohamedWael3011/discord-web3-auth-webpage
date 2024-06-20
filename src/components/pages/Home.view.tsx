@@ -26,7 +26,6 @@ export const Home = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const address = useAddress();
   const signer = useSigner();
-  console.log("Address:", address);
 
   const query = useQuery();
   const code = query.get("code");
@@ -37,7 +36,6 @@ export const Home = () => {
 
       const message = `I am updating my Matic address at ${new Date().toISOString()}`;
       const signature = await signer?.signMessage(message);
-      console.log("Signature:", signature);
 
       const response = await axios.post(`http://${serverIp}:${port}/update-matic-address/`, {
         discordID: user?.id,
@@ -47,7 +45,6 @@ export const Home = () => {
     
       });
 
-      console.log("User data updated:", response.data);
       setShowSuccessAlert(true);
     } catch (error) {
       console.error("Error updating user data:", error);
