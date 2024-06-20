@@ -39,11 +39,12 @@ export const Home = () => {
       const signature = await signer?.signMessage(message);
       console.log("Signature:", signature);
 
-      const response = await axios.post(`http://${serverIp}:${port}/update-matic-address/`, {
+      const response = await axios.post(`https://${serverIp}:${port}/update-matic-address/`, {
         discordID: user?.id,
         maticAddress: address,
         signature,
         message,
+    
       });
 
       console.log("User data updated:", response.data);
@@ -60,7 +61,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://${serverIp}:${port}/auth/discord/callback/?code=${code}`);
+        const response = await axios.get(`https://${serverIp}:${port}/auth/discord/callback/?code=${code}`);
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
