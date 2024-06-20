@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 const DiscordLoginButton = () => {
   const handleLogin = () => {
-    window.location.href = 'http://localhost:5000/auth/discord';
+    window.location.href = `http://${import.meta.env.VITE_SERVER_IP}:${import.meta.env.VITE_PORT}/auth/discord`;
   };
 
   return (
