@@ -37,7 +37,7 @@ export const Home = () => {
       const message = `Sign this message to prove ownership of this wallet. This is READ-ONLY access and will NOT trigger any blockchain transactions or incur any fees.`;
       const signature = await signer?.signMessage(message);
 
-      const response = await axios.post(`http://${serverIp}:${port}/update-matic-address/`, {
+      const response = await axios.post(`http://${serverIp}/update-matic-address/`, {
         discordID: user?.id,
         maticAddress: address,
         signature,
