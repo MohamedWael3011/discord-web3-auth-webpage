@@ -58,7 +58,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://${serverIp}:${port}/auth/discord/callback/?code=${code}`);
+        const response = await axios.get(`http://${serverIp}/auth/discord/callback/?code=${code}`);
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
